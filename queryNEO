@@ -1,0 +1,136 @@
++//Create TEAMS
+ CREATE (adana:Team 				{ name: "Adanaspor" })
+ CREATE (akhisar:Team 			{ name: "Akhisar Belediyespor" })
+ CREATE (alanyaspor:Team 		{ name: "Alanyaspor" })
+ CREATE (antalyaspor:Team 		{ name: "Antalyaspor" })
+ CREATE (besiktas:Team 			{ name: "Beşiktaş" })
+ CREATE (bursaspor:Team 			{ name: "Bursaspor" })
+ CREATE (caykurRizespor:Team 	{ name: "Çaykur Rizespor" })
+ CREATE (fenerbahce:Team 		{ name: "Fenerbahçe" })
+ CREATE (galatasaray:Team 		{ name: "Galatasaray" })
+ CREATE (gaziantepspor:Team 		{ name: "Gaziantepspor" })
+ CREATE (genclerbirligi:Team 	{ name: "Gençlerbirliği" })
+ CREATE (istanbulBasaksehir:Team { name: "İstanbul Başakşehir	" })
+ CREATE (kardemirKarabukspor:Team{ name: "Kardemir Karabukspor" })
+ CREATE (kasimpasa:Team 			{ name: "Kasımpaşa" })
+ CREATE (kayserispor:Team 		{ name: "Kayserisporr" })
+ CREATE (konyaspor:Team 			{ name: "Konyaspor" })
+ CREATE (osmanlispor:Team 		{ name: "Osmanlıspor" })
+ CREATE (trabzonspor:Team 		{ name: "Trabzonspor" })
+ 
+ +Adanaspor Akhisar Belediyespor Alanyaspor Antalyaspor Beşiktaş Bursaspor Çaykur Rizespor	 Fenerbahçe Galatasaray Gaziantepspor Gençlerbirliği İstanbul Başakşehir	 Kardemir Karabukspor Kasımpaşa Kayserispor Konyaspor Osmanlıspor Trabzonspor 
+ +
+ +//Create Weeks
+ +CREATE (w1:Week 	{ name: "Week1" })
+ +CREATE (w2:Week 	{ name: "Week2" })
+ +CREATE (w3:Week 	{ name: "Week3" })
+ +CREATE (w4:Week 	{ name: "Week4" })
+ +CREATE (w5:Week 	{ name: "Week5" })
+ +CREATE (w6:Week 	{ name: "Week6" })
+ +CREATE (w7:Week 	{ name: "Week7" })
+ +CREATE (w8:Week 	{ name:	"Week8" })
+ +CREATE (w9:Week 	{ name: "Week9" })
+ +
+ +CREATE (w10:Week 	{ name: "Week10" })
+ +CREATE (w11:Week 	{ name: "Week11" })
+ +CREATE (w12:Week 	{ name: "Week12" })
+ +CREATE (w13:Week 	{ name: "Week13" })
+ +CREATE (w14:Week 	{ name: "Week14" })
+ +CREATE (w15:Week 	{ name: "Week15" })
+ +CREATE (w16:Week 	{ name: "Week16" })
+ +CREATE (w17:Week 	{ name: "Week17" })
+ +CREATE (w18:Week 	{ name:	"Week18" })
+ +CREATE (w19:Week 	{ name: "Week19" })
+ +
+ +CREATE (w20:Week 	{ name: "Week20" })
+ +CREATE (w21:Week 	{ name: "Week21" })
+ +CREATE (w22:Week 	{ name: "Week22" })
+ +CREATE (w23:Week 	{ name: "Week23" })
+ +CREATE (w24:Week 	{ name: "Week24" })
+ +CREATE (w25:Week 	{ name: "Week25" })
+ +CREATE (w26:Week 	{ name: "Week26" })
+ +CREATE (w27:Week 	{ name: "Week27" })
+ +CREATE (w28:Week 	{ name:	"Week28" })
+ +CREATE (w29:Week 	{ name: "Week29" })
+ +
+ +CREATE (w30:Week 	{ name: "Week30" })
+ +CREATE (w31:Week 	{ name: "Week31" })
+ +CREATE (w32:Week 	{ name: "Week32" })
+ +CREATE (w33:Week 	{ name: "Week33" })
+ +CREATE (w34:Week 	{ name: "Week34" })
+ +
+ +
+ +//Create Matches
+ +CREATE (w1_m1:Match 	{ name: "Match1_1" })-[:IN]->(w1:Week { name: "Week1" })
+ +CREATE (w1_m2:Match 	{ name: "Match1_2" })
+ +CREATE (w1_m3:Match 	{ name: "Match1_3" })
+ +CREATE (w1_m4:Match 	{ name: "Match1_4" })
+ +CREATE (w1_m5:Match 	{ name: "Match1_5" })
+ +CREATE (w1_m6:Match 	{ name: "Match1_6" })
+ +CREATE (w1_m7:Match 	{ name: "Match1_7" })
+ +CREATE (w1_m8:Match 	{ name:	"Match1_8" })
+ +CREATE (w1_m9:Match 	{ name: "Match1_9" })
+
+
+Match (m:Match {name:"Match1_1"}),(w:Week {name:"Week1"}),(t1:Team {name:"Match1_1"}),
+Create p=(w)-[:HAS_A]->(m)
+Match (m:Match {name:"Match1_2"}),(w:Week {name:"Week1"})
+Create p=(w)-[:HAS_A]->(m)
+Match (m:Team {name:"Match1_2"}),(w:Week {name:"Week1"})
+Create p=(w)-[:HAS_A]->(m)
+Match (t1:Team{name:"Çaykur Rizespor"),(t2:Team{name:"Konyaspor"}),t1-[r1]->(m:Match{name:"Match1_9"}),t2-[r2]->(m:Match{name:"Match1_9"})
+DELETE r1,r2
+
+//INSERTING FIRST WEEK MATCHES
+Match (t1:Team {name:"Beşiktaş"}),(t2:Team {name:"Alanyaspor"}),(m:Match {name:"Match1_1"})
+SET t1.score=4, t2.score=1, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="20.08.2016 21:45",
+
+Match (t1:Team {name:"Adanaspor"}),(t2:Team {name:"Bursaspor"}),(m:Match {name:"Match1_2"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=1, t2.score=2, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="19.08.2016 21:45",
+**
+Match (t1:Team {name:"Çaykur Rizespor"}),(t2:Team {name:"Konyaspor"}),(m:Match {name:"Match1_3"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=1, t2.score=1, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="20.08.2016 19:30",
+
+Match (t1:Team {name:"Trabzonspor"}),(t2:Team {name:"Kasımpaşa"}),(m:Match {name:"Match1_4"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=2, t2.score=0, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="20.08.2016 19:30",
+
+Match (t1:Team {name:"Gençlerbirliği"}),(t2:Team {name:"Gaziantepspor"}),(m:Match {name:"Match1_5"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=2, t2.score=0, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="21.08.2016 19:30",
+
+Match (t1:Team {name:"Kayserisporr"}),(t2:Team {name:"Akhisar Belediyespor"}),(m:Match {name:"Match1_6"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=0, t2.score=2, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="21.08.2016 19:30",
+
+Match (t1:Team {name:"İstanbul Başakşehir	"}),(t2:Team {name:"Fenerbahçe"}),(m:Match {name:"Match1_7"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=1, t2.score=1, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="21.08.2016 21:45",
+
+Match (t1:Team {name:"Antalyaspor"}),(t2:Team {name:"Osmanlıspor"}),(m:Match {name:"Match1_8"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=0, t2.score=0, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="21.08.2016 19:45",
+
+Match (t1:Team {name:"Galatasaray"}),(t2:Team {name:"Kardemir Karabukspor"}),(m:Match {name:"Match1_9"})
+Create (t1)-[:PLAYED]->(m),(t2)-[:PLAYED]->(m)
+SET t1.score=1, t2.score=0, 
+	m.homeTeam=t1.name,m.awayTeam=t2.name, m.homeScore=t1.score, m.awayScore=t2.score,
+	m.date="22.08.2016 21:45"
